@@ -30,3 +30,17 @@ export default defineTypo3Config(() => {
 ```bash
 npm install git+github.com:ochorocho/tvite.git#main
 ```
+
+## Commands
+
+Run build:
+
+```bash
+./node_modules/.bin/tvite build
+```
+
+Run dev server:
+
+```bash
+./node_modules/.bin/tvite serve
+```
