@@ -1,0 +1,37 @@
+{
+  "name": "tvite",
+  "version": "1.0.0",
+  "description": "TYPO3 Vite - A wrapper around vite to generate a bundle for a given set of extensions",
+  "main": "./dist/index.js",
+  "bin": {
+    "tvite": "dist/cli.js"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "tsc",
+    "watch": "tsc --watch"
+  },
+  "keywords": [
+    "TYPO3",
+    "Vite",
+    "frontend"
+  ],
+  "author": "ochorocho",
+  "license": "MIT",
+  "dependencies": {
+    "@babel/types": "^7.22.15",
+    "autoprefixer": "^10.4.15",
+    "fast-glob": "^3.3.1",
+    "glob-regex": "^0.3.2",
+    "minimist": "^1.2.8",
+    "sharp": "^0.32.5",
+    "vite": "^4.4.9",
+    "vite-plugin-image-optimizer": "^1.1.7",
+    "vite-svg-loader": "^4.0.0",
+    "vue": "^3.3.4"
+  },
+  "devDependencies": {
+    "@types/node": "^20.5.9",
+    "typescript": "^5.2.2"
+  }
+}
