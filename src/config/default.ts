@@ -11,18 +11,18 @@ export function defaultConfig(mode: string = 'production') {
             ViteImageOptimizer(),
         ],
         publicDir: false,
-        base: './',
+        base: '',
         build: {
             manifest: true,
             target: 'es2020',
             rollupOptions: {
                 input: '',
                 output: {
-                    assetFileNames: '[name]-[hash].[ext]',
-                    entryFileNames: '[name]-[hash].js'
+                    assetFileNames: 'Public/[name]-[hash].[ext]',
+                    entryFileNames: 'Public/[name]-[hash].js'
                 }
             },
-            outDir: 'packages/',
+            outDir: 'vite-outDir-not-configured', // @todo: better config error handling
             emptyOutDir: false,
         },
         css: {
@@ -39,7 +39,7 @@ export function defaultConfig(mode: string = 'production') {
             },
         },
         server: {
-            origin: `${process.env.DDEV_PRIMARY_URL}:${process.env.VITE_PRIMARY_PORT}/`,
+            origin: `${process.env.DDEV_PRIMARY_URL}:${process.env.VITE_PRIMARY_PORT}`,
         },
     })
 
