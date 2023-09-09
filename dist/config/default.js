@@ -20,12 +20,11 @@ function defaultConfig(mode = 'production') {
         build: {
             manifest: true,
             target: 'es2020',
-            assetsDir: '',
             rollupOptions: {
                 input: '',
                 output: {
-                    assetFileNames: 'Public/[name]-[hash].[ext]',
-                    entryFileNames: 'Public/[name]-[hash].js'
+                    assetFileNames: '[name]-[hash].[ext]',
+                    entryFileNames: '[name]-[hash].js'
                 }
             },
             outDir: 'vite-outDir-not-configured',

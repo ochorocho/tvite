@@ -18,8 +18,8 @@ export function defaultConfig(mode: string = 'production') {
             rollupOptions: {
                 input: '',
                 output: {
-                    assetFileNames: 'Public/[name]-[hash].[ext]',
-                    entryFileNames: 'Public/[name]-[hash].js'
+                    assetFileNames: '[name]-[hash].[ext]',
+                    entryFileNames: '[name]-[hash].js'
                 }
             },
             outDir: 'vite-outDir-not-configured', // @todo: better config error handling

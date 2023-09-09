@@ -24,7 +24,7 @@ async function getConfig(command, mode, configFile = 'vite.config.js') {
         mode: mode,
     };
     let projectConfig = await (0, vite_1.loadConfigFromFile)(configEnv, node_path_1.default.join(process.cwd(), configFile));
-    return (0, vite_1.mergeConfig)(projectConfig.config, (0, default_js_1.defaultConfig)(mode), true);
+    return (0, vite_1.mergeConfig)(projectConfig.config, (0, default_js_1.defaultConfig)(mode), false);
 }
 exports.getConfig = getConfig;
 async function build(entryPoints, defaultConfig) {

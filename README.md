@@ -12,9 +12,7 @@ export default defineTypo3Config(() => {
       entryPoints: {
         'site-distribution': {
           input: './packages/site-distribution/Resources/Private/Assets/JavaScript/app.js',
-          // Omit Public and treat Resources as output directory,
-          // to avoid having a public manifest.json
-          outDir: './packages/site-distribution/Resources/',
+          outDir: './packages/site-distribution/Resources/Public/',
         }
       }
     },
