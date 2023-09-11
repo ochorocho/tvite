@@ -42,26 +42,26 @@ async function build(entryPoints, defaultConfig) {
 }
 exports.build = build;
 async function serve(entryPoints, defaultConfig) {
-    let entryConfig = {
-        build: {
-            rollupOptions: {
-                input: entryPoints['site-distribution'].input
-            },
-            outDir: entryPoints['site-distribution'].outDir,
-        },
-        server: {
-            hmr: {
-                onReload: (info) => {
-                    // Print information about reloaded files
-                    console.log('Reloaded files:', info.file, info.timestamp);
+    let port = parseInt(process.env.VITE_PRIMARY_PORT);
+    for (const entry of Object.keys(entryPoints)) {
+        let entryConfig = {
+            build: {
+                rollupOptions: {
+                    input: entryPoints[entry].input
                 },
+                outDir: entryPoints[entry].outDir,
             },
-        }
-    };
-    let config = await (0, vite_1.mergeConfig)(defaultConfig, entryConfig);
-    const server = await (0, vite_1.createServer)(config);
-    await server.listen();
-    server.printUrls();
+            server: {
+                port: port + 1,
+                origin: `${process.env.DDEV_PRIMARY_URL}:${port + 1}`,
+                //host: process.env.DDEV_HOSTNAME
+            }
+        };
+        let config = await (0, vite_1.mergeConfig)(entryConfig, defaultConfig);
+        const server = await (0, vite_1.createServer)(config);
+        await server.listen();
+        server.printUrls();
+    }
 }
 exports.serve = serve;
 //# sourceMappingURL=helper.js.map

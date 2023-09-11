@@ -1,10 +1,18 @@
-import {loadConfigFromFile, defineConfig, mergeConfig, ConfigEnv, build as viteBuild, createServer} from "vite";
+import {
+  loadConfigFromFile,
+  defineConfig,
+  mergeConfig,
+  ConfigEnv,
+  build as viteBuild,
+  createServer,
+  ViteDevServer
+} from "vite";
 import {defaultConfig} from './config/default.js'
 import path from "node:path";
 
 function getMode() {
   const modeValueIndex = process.argv.indexOf('--mode') + 1;
-  if(process.argv.length >= modeValueIndex && !process.argv[modeValueIndex].startsWith('--')) {
+  if (process.argv.length >= modeValueIndex && !process.argv[modeValueIndex].startsWith('--')) {
     return process.argv[modeValueIndex]
   }
 
@@ -42,28 +50,27 @@ export async function build(entryPoints, defaultConfig) {
 }
 
 export async function serve(entryPoints, defaultConfig) {
-  let entryConfig = {
-        build: {
-          rollupOptions: {
-            input: entryPoints['site-distribution'].input
-          },
-          outDir: entryPoints['site-distribution'].outDir,
+  let port: number = parseInt(process.env.VITE_PRIMARY_PORT)
+
+  for (const entry of Object.keys(entryPoints)) {
+    let entryConfig = {
+      build: {
+        rollupOptions: {
+          input: entryPoints[entry].input
         },
-        server: {
-          hmr: {
-            onReload: (info) => {
-              // Print information about reloaded files
-              console.log('Reloaded files:', info.file, info.timestamp);
-            },
-          },
-        }
+        outDir: entryPoints[entry].outDir,
+      },
+      server: {
+        port: port + 1,
+        origin: `${process.env.DDEV_PRIMARY_URL}:${port + 1}`,
+        //host: process.env.DDEV_HOSTNAME
       }
+    }
 
-  let config = await mergeConfig(defaultConfig, entryConfig)
+    let config = await mergeConfig(entryConfig, defaultConfig)
+    const server = await createServer(config)
+    await server.listen()
 
-  const server = await createServer(config)
-  await server.listen()
-
-  server.printUrls()
+    server.printUrls()
+  }
 }
-

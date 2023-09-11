@@ -6,13 +6,11 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.defaultConfig = void 0;
 const vite_1 = require("vite");
 const autoprefixer_1 = __importDefault(require("autoprefixer"));
-const vite_svg_loader_1 = __importDefault(require("vite-svg-loader"));
 const vite_plugin_image_optimizer_1 = require("vite-plugin-image-optimizer");
 function defaultConfig(mode = 'production') {
     return (0, vite_1.defineConfig)({
         mode: 'production',
         plugins: [
-            (0, vite_svg_loader_1.default)(),
             (0, vite_plugin_image_optimizer_1.ViteImageOptimizer)(),
         ],
         publicDir: false,
@@ -42,10 +40,7 @@ function defaultConfig(mode = 'production') {
                     additionalData: `$mode: ${mode};`,
                 },
             },
-        },
-        server: {
-            origin: `${process.env.DDEV_PRIMARY_URL}:${process.env.VITE_PRIMARY_PORT}`,
-        },
+        }
     });
 }
 exports.defaultConfig = defaultConfig;

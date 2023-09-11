@@ -1,13 +1,11 @@
 import {defineConfig} from 'vite'
 import autoprefixer from 'autoprefixer';
-import svgLoader from 'vite-svg-loader';
 import { ViteImageOptimizer } from 'vite-plugin-image-optimizer';
 
 export function defaultConfig(mode: string = 'production') {
     return defineConfig({
         mode: 'production',
         plugins: [
-            svgLoader(),
             ViteImageOptimizer(),
         ],
         publicDir: false,
@@ -37,10 +35,7 @@ export function defaultConfig(mode: string = 'production') {
                     additionalData: `$mode: ${mode};`,
                 },
             },
-        },
-        server: {
-            origin: `${process.env.DDEV_PRIMARY_URL}:${process.env.VITE_PRIMARY_PORT}`,
-        },
+        }
     })
 
 }
